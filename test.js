@@ -16,7 +16,7 @@ async function run(url, photoSavePath) {
     var html = await getHTML(url);
 
     // console.log(html);
-    var index = html.indexOf('https://w.wallhaven.cc/full/')
+    var index = html.indexOf('https://w.example.com/img/')
     console.log(index);
     console.log(html.substring(index,index+51));
 
