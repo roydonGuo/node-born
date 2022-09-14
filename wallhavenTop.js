@@ -3,8 +3,8 @@ const cheerio = require('cheerio')
 const request = require('request')
 const fs = require('fs')
 
-let url = 'https://wallhaven.cc/toplist?page='
-let page = 43;
+let url = 'https://example.com/imglist?page='
+let page = 23;
 let photoSavePath = './imgTop';
 
 let imgS = []
@@ -14,7 +14,6 @@ run(url, page, photoSavePath)
     });
 
 async function run(url, page, photoSavePath) {
-    //  获得首页
     let html;
     for (let i = page; i <= page; i++) {
         html = await getHTML(url + i);
@@ -22,8 +21,7 @@ async function run(url, page, photoSavePath) {
         const $ = cheerio.load(html, {
             decodeEntities: false
         });
-        // 数据处理
-
+        // dom 处理
         $('.thumb-listing-page ul li figure .preview').each((i, item) => {
             let toFullImgUrl = $(item).attr('href')
             console.log('toFullImgUrl------' + toFullImgUrl);
@@ -56,10 +54,11 @@ function getHTML(url, timeout = 50000) {
 
 // 获得图片的full的详细信息
 async function getDetailMessage(url) {
+    // 此处的逻辑需要自己写
     try {
         let detailHTML = await getHTML(url);
         // console.log(detailHTML);
-        var index = detailHTML.indexOf('https://w.wallhaven.cc/full/')
+        var index = detailHTML.indexOf('https://wxample.cc/full/')
         console.log(index);
         let fullImgUrl = detailHTML.substring(index, index + 51)
         // console.log(fullImgUrl);
